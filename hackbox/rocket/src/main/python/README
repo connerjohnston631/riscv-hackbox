@@ -3,6 +3,6 @@ specifications in ../verilog/README.
 
 execute on the command line as follows:
 
-$python <verilog file name> <number of inputs>
+$python <number of inputs> <number of outputs> <verilog file name>
 
 once completed, proceed to the top/fsim and follow the directions in the README

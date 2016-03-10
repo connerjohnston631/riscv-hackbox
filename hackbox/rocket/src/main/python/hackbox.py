@@ -1,6 +1,6 @@
 import sys
 
-USAGE = '$python hackbox.py num_registers verilog_filename'
+USAGE = '$python hackbox.py num_registers_in num_registers_out verilog_filename'
 INSERT = '~$$THISISUNIQUE$$~'
 
 def hackStringHelper(hackString, num_registers):
@@ -14,14 +14,16 @@ def stringReplacementHelper(file_string, removal_string, insertion_string):
 	
 
 def main():	
-	if len(sys.argv) != 3:
+	if len(sys.argv) != 4:
 		print USAGE
 		exit(0)
-	(num_registers, verilog_file) = (int(sys.argv[1]), sys.argv[2])
-	replacements = {'HACK_BOX_IO_INPUT_DECLARATIONS': hackStringHelper('val in_' + INSERT + ' = UInt(INPUT, width = 64)', num_registers),
- 		'HACK_BOX_N': str(num_registers),
- 		'HACK_BOX_ACCUMULATOR_VALUES': hackStringHelper('val accum_' + INSERT + '= regfile(' + INSERT + ')', num_registers),
- 		'HACK_BOX_IO_INPUT_INTEGRATION': hackStringHelper('hackBox.io.in_' + INSERT + ' := accum_' + INSERT, num_registers)}
+	(num_registers_in, num_registers_out, verilog_file) = (int(sys.argv[1]), int(sys.argv[2]), sys.argv[3])
+	replacements = {'HACK_BOX_IO_INPUT_DECLARATIONS': hackStringHelper('val in_' + INSERT + ' = UInt(INPUT, width = 64)', num_registers_in),
+ 		'HACK_BOX_N': str(max(num_registers_in, num_registers_out)),
+ 		'HACK_BOX_ACCUMULATOR_VALUES': hackStringHelper('val accum_' + INSERT + '= regfile(' + INSERT + ')', num_registers_in),
+ 		'HACK_BOX_IO_INPUT_INTEGRATION': hackStringHelper('hackBox.io.in_' + INSERT + ' := accum_' + INSERT, num_registers_in),
+ 		'HACK_BOX_IO_OUTPUT_INTEGRATION': hackStringHelper('regfile(' + INSERT + ') := hackBox.io.out_' + INSERT, num_registers_out),
+ 		'HACK_BOX_IO_OUTPUT_DECLARATIONS': hackStringHelper('val out_' + INSERT + ' = UInt(OUTPUT, width = 64)', num_registers_out)}
 	print str(replacements)
 	full_file = open('../hackbox/rocc.hackbox', 'r').read()
 	copy = full_file

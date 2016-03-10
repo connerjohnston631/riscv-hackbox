@@ -20,3 +20,10 @@ will have to conform the Accelerator interface, but should allow for
 quick plugging in and prototyping. To start, put your verilog into the 
 /hackbox/rocket/src/main/verilog/ folder and modify it to the specifications
 of the README provided.
+
+This branch of the HackBox project allows for the verilog to have multiple
+outputs as well as inputs. The inputs are always active, but the outputs 
+only write to the Accumulator registers upon the doAccum command from 
+the RISCV custom0 function parameter (see rocc.scala). This modification
+should provide an advantage in implementing recursive functions with 
+a hardware accelerator.

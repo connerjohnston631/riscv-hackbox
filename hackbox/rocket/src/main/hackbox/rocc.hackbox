@@ -61,7 +61,10 @@ class HackBoxIO extends Bundle{
   //example: val in_0 = UInt(INPUT, width = 64)
 HACK_BOX_IO_INPUT_DECLARATIONS
 
-  val out = UInt(OUTPUT, width = 64)
+  //example: val out = UInt(OUTPUT, width = 64)
+
+HACK_BOX_IO_OUTPUT_DECLARATIONS
+
 }
 
 class HackBox extends BlackBox{
@@ -97,9 +100,15 @@ HACK_BOX_ACCUMULATOR_VALUES
 HACK_BOX_IO_INPUT_INTEGRATION
 
  
-  val wdata = Mux(doWrite, addend, hackBox.io.out) //<-- black box output
+  val wdata = addend
 
-  when (cmd.fire() && (doWrite || doAccum)) {
+  when (cmd.fire() && (doAccum)){
+//example: regfile(0) := hackBox.io.out_0
+HACK_BOX_IO_OUTPUT_INTEGRATION
+
+  }
+
+  when (cmd.fire() && (doWrite)) {
     regfile(addr) := wdata
   }
 

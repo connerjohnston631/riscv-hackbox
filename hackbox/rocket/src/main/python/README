@@ -1,0 +1,8 @@
+To run, you must have created your verilog file according to the 
+specifications in ../verilog/README. 
+
+execute on the command line as follows:
+
+$python <verilog file name> <number of inputs>
+
+once completed, proceed to the top/fsim and follow the directions in the README

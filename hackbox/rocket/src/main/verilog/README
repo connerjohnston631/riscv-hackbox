@@ -1,0 +1,18 @@
+in order for your verilog to be synthesized into the ROCC,
+it needs to have the following conditions:
+1) n inputs, one output.
+2) all ports are 64 bits wide
+3) the circuit is purely combinational (clk on next iteration, or add it to Top.HackBoxFPGAConfig.v before bitstream synthesis with Vivado)
+4) the names of the ports should be declared as follows:
+	
+module <module name>(
+	input [63: 0] in_0,
+	input [63: 0] in_1, 
+	...
+	output [63: 0] out
+	);
+...
+endmodule
+
+After your verilog is according to these rules and is in this folder,
+proceed to ../python/ and follow the README

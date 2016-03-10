@@ -1,0 +1,5 @@
+(HTIF_WIDTH,16)
+(MEM_DATA_BITS,128)
+(buffer_sram,false)
+(MEM_TAG_BITS,6)
+(MEM_ADDR_BITS,26)

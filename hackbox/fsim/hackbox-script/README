@@ -1,0 +1,6 @@
+hackbox.sh will append the verilog in the file created by the hackbox.py 
+processing your verilog to the generated verilog of the HackBoxFPGAConfig 
+of the rocket core.
+
+after this, synthesize your bistream and try your design out on the FPGA! 
+
